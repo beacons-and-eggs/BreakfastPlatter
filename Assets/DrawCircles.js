@@ -18,7 +18,9 @@ function Update () {
 //		transform.hasChanged = false;
 //	}
 	if (Input.GetMouseButton(0) && transform.hasChanged){ 
-		Instantiate(drawCircle, destination, Quaternion.identity);
+		var newCircle = Instantiate(drawCircle, destination, Quaternion.identity);
+		newCircle.transform.LookAt(Camera.main.transform);
+
 		transform.hasChanged = false;
 	}
 }
