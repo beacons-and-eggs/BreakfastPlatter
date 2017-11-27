@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/ControlPanel.unity
+    path: 
     guid: 1fa588331580d4d00a0d5b59ffabb0d1
   - enabled: 0
     path: Assets/Scenes/World2.unity

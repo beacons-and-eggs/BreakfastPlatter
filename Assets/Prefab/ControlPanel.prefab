@@ -592,7 +592,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4cd9152c8aea4e40a4807771be91ba8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slideLocation: /Users/Takashi/Documents/GitHub/Remington-Working/SlideViewer/Assets/Slides/Using_CellProfiler_for_quantitative_analysis
+  slideLocation:
+  - {fileID: 21300000, guid: 3fda9c4c4d88d574486c3ef992b4661d, type: 3}
+  - {fileID: 21300000, guid: 68235dc540f82e34f85fe7acaa5bc551, type: 3}
+  - {fileID: 21300000, guid: dd5d447a92e203b42ace33160e5af44d, type: 3}
+  - {fileID: 21300000, guid: ebd00769c214dd449814d9a0f979644c, type: 3}
   screen: {fileID: 0}
 --- !u!114 &114582316903339810
 MonoBehaviour:
@@ -833,7 +837,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1470785725901336}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 745db54bca3134d118cca7c432f95bd4, type: 3}
   m_Name: 

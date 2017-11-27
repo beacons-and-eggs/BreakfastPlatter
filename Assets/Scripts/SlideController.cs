@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,24 +19,22 @@ using UnityEngine.UI;
 public class SlideController
 {
 
-    private string location; // the general location of the slides
-    private int slideCount = -1; //the number of slides in the folder
     private int slideState = 0; //the current slide
-    private List<string>  slides; //the location and names of the slides
-    private bool needToUpdateImage = true;
-    private string materialsLocation;
-    private bool enabled;
-    public GameObject screen; 
-    
-    public SlideController(string location, GameObject screen)
-    {
-        this.location = location;
-        this.screen = screen;
-        this.enabled = true;
 
-        findSlides(); //get all files in the location directory
-        scrubSlides(); //only hold on to png or jpg
-        this.slideCount = this.slides.Count;
+    private List<Sprite> sprites; 
+
+
+    private bool needToUpdateImage = true;
+    private bool enabled = true;
+    
+    private Image canvasImage;
+    
+    public SlideController(List<Sprite> slides, GameObject screen)
+    {
+        this.sprites = slides;
+        this.canvasImage = screen.GetComponentInChildren<Image>();
+
+     
     }
 	
 	// Update is called once per frame
@@ -43,85 +42,45 @@ public class SlideController
         //only update if the image has recently been changed
         if (enabled && needToUpdateImage)
         {
-            //find where this image is
-            string loc =   this.slides[this.slideState];
-
+            Debug.Log("state: " + this.slideState);
             //create a new shell for Spirte
-            Sprite s = new Sprite();
-            Texture2D st = LoadTexture(loc);
+            Sprite s = this.sprites[this.slideState];
+            Texture2D st = s.texture;
             //ensure that the file actually existed
             if (st == null)
                 return;
             //create a basic sprite
+
             s = Sprite.Create(st, new Rect(0,0, st.width, st.height), new Vector2(0,0), 100f );
-         
-            Image sc = screen.GetComponentInChildren<Image>();
-            
+
             //resize the image object to the picture size if necessary
-            sc.GetComponent<RectTransform>().sizeDelta = new Vector2(st.width, st.height);
-            sc.sprite = s;
+            canvasImage.GetComponent<RectTransform>().sizeDelta = new Vector2(st.width, st.height);
+            if (this.sprites == null)
+                canvasImage.sprite = s;
+            else
+            {
+
+                canvasImage.sprite = this.sprites[this.slideState];
+                //this.sprites.RemoveAt(0);
+            }
 
             needToUpdateImage = false;
         }
 		
 	}
 
-
-    //returns a Texture2D if the file exists, null if it doesn't
-    private Texture2D LoadTexture(string filePath)
+    public bool slidesCompleted()
     {
-        Texture2D tex;
-        byte[] fileData;
-        //does the file exist
-        if (File.Exists(filePath))
-        {
-            //get the raw data
-            fileData = File.ReadAllBytes(filePath);
-            //the initial size doesnt matter because it will get resized
-            tex = new Texture2D(2, 2);
-            //returns true if the file is valid
-            if (tex.LoadImage(fileData))
-            {
-                return tex;
-            }
-        }
-        //return null if it doesnt exist
-        return null;
-    }
-
-
-
-
-
-    private bool findSlides()
-    {
-       this.slides =  new List<string>(Directory.GetFiles(this.location));
-        return slides.Count > 0;
-    }
-
-    private bool scrubSlides()
-    {
-        for(int i = 0; i < slides.Count; i++)
-        {
-            if(   !(Path.GetExtension(slides[i]).Equals(".png") || Path.GetExtension(slides[i]).Equals(".jpg") || Path.GetExtension(slides[i]).Equals(".PNG")))
-            {
-                Debug.Log("remove" + Path.GetExtension(slides[i]));
-                slides.RemoveAt(i);
-                continue;
-            }
-            Debug.Log("keep" + Path.GetExtension(slides[i]));
-
-
-        }
-
-        return this.slides.Count > 0;
+        if (this.slideState == this.sprites.Count - 1)
+            return true;
+        return false;
     }
 
     public void incrementSlide()
     {
         if (this.enabled)
         {
-            if (slideState + 1 < slideCount)
+            if (slideState + 1 < this.sprites.Count)
             {
                 needToUpdateImage = true;
                 slideState++;
@@ -154,10 +113,18 @@ public class SlideController
     public void setEnabled(bool enabled)
     {
         this.enabled = enabled;
+        this.canvasImage.enabled = this.enabled;
     }
 
     public void toggleEnabled()
     {
         this.enabled = !this.enabled;
+        this.canvasImage.enabled = this.enabled;
+        
     }
+
+
+
+
+
 }

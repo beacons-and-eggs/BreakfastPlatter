@@ -9,7 +9,7 @@ public class ControlPanel : MonoBehaviour {
 //	public Button worldBackButton;
 //	public Button worldNextButton;
 
-	public string slideLocation;//where do the slides live NOTE: USE ABSOLUTE PATH
+	public List<Sprite> slideLocation;//where do the slides live NOTE: USE ABSOLUTE PATH
 	public GameObject screen;
 
 	private SlideController sController;
