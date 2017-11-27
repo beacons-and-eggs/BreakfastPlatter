@@ -290,6 +290,7 @@ GameObject:
   - component: {fileID: 248021495}
   - component: {fileID: 248021494}
   - component: {fileID: 248021499}
+  - component: {fileID: 248021498}
   m_Layer: 0
   m_Name: NextWorldPreview
   m_TagString: Untagged
@@ -373,6 +374,18 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 248021492}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &248021498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 248021492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d753a2d9227d74f0ebe13b85502ba7d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToChangeTo: 
 --- !u!114 &248021499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2247,7 +2260,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 5670a44f47ee24e02a1d79cf196b2cc8, type: 2}
+  - {fileID: 2100000, guid: db3108737dbc64a6fbd02f00a6f9e61f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
