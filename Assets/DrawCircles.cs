@@ -6,8 +6,9 @@ using UnityEngine;
 public class DrawCircles : MonoBehaviour {
 
 	IEnumerator removeLine(){
+		yield return new WaitForSeconds (2f);
 		for (int i = pointcount; i > 0; i--) {
-			yield return new WaitForSeconds (0.01f);
+			yield return new WaitForSeconds (0.002f);
 //			lineRenderer.SetVertexCount (i);
 			points.RemoveAt(0);
 		}
@@ -45,17 +46,22 @@ public class DrawCircles : MonoBehaviour {
 		lineRenderer.endColor = Color.cyan;
 	}
 
+	void startLine(){
+
+	}
+
 	void  Update (){
-		Vector3 fwd= transform.TransformDirection(Vector3.forward);
-		int distance= 100; //max distance from camera you can draw
 		var ray = Camera.main.ViewportPointToRay(new Vector3 (0.5f, 0.5f, 5));
 		var destination = Camera.main.ViewportToWorldPoint (new Vector3 (0.5f, 0.5f, 10));
 
 		if (Input.GetMouseButton (0) && transform.hasChanged && !Physics.Raycast (ray)) { 
-			drawing = true;
+			if (!drawing) {
+				startLine ();
+			} 
 			AddLinePoint (destination);
+			drawing = true;
+
 		} else if(drawing && !Input.GetMouseButton (0)) {
-			Debug.Log ("AHISHIHIH");
 			drawing = false;
 			StopAllCoroutines ();
 			StartCoroutine (removeLine ());
