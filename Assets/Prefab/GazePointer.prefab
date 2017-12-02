@@ -615,7 +615,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d1edf57149e40288cc5a2e34380290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 0}
   endPoint: {fileID: 1856229008359870}
   face: {fileID: 1974938488304982}
 --- !u!120 &120848357891799834
